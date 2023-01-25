@@ -1,17 +1,17 @@
 #ifndef PRINCIPAL_H
 #define PRINCIPAL_H
 
-#include <QMainWindow>
-#include <QImage>
+#include <QMainWindow> //Para que la clase herede
+#include <QImage>  //Imagen
 #include <QPainter>
-#include <QMouseEvent>
-#include <QPaintEvent>
+#include <QMouseEvent> // Eventos del mouse
+#include <QPaintEvent> //Pintando
 #include <QDebug>
-#include <QInputDialog>
+#include <QInputDialog> //Cuadros de dialogo predeterminados
 #include <QColorDialog>
-#include <QFileDialog>
+#include <QFileDialog> //Guardar el archivo
 #include <QMessageBox>
-
+#include <QToolBar>
 QT_BEGIN_NAMESPACE
 namespace Ui { class Principal; }
 QT_END_NAMESPACE
@@ -25,10 +25,11 @@ public:
     ~Principal();
 
 protected:
-    void paintEvent(QPaintEvent *event) override;
-    void mousePressEvent(QMouseEvent *event) override;
-    void mouseMoveEvent(QMouseEvent *event) override;
-    void mouseReleaseEvent(QMouseEvent *event) override;
+    void paintEvent(QPaintEvent *event) override;  //override (sobre-escrbir)
+    void mousePressEvent(QMouseEvent *event) override;   //click
+    void mouseMoveEvent(QMouseEvent *event) override;    //mover
+    void mouseReleaseEvent(QMouseEvent *event) override; //sueltas el mouse
+
 
 
 private slots:
@@ -41,6 +42,8 @@ private slots:
     void on_actionNuevo_triggered();
 
     void on_actionGuardar_triggered();
+
+    void on_actionLineas_triggered();
 
 private:
     Ui::Principal *ui;

@@ -9,12 +9,13 @@ Principal::Principal(QWidget *parent)
 {
     ui->setupUi(this);
     // Instanciando la imagen (creando)
-    mImagen = new QImage(this->size(),QImage::Format_ARGB32_Premultiplied);
+    mImagen = new QImage(this->size(),QImage::Format_ARGB32_Premultiplied); //Formato
     // Rellenar la imagen de color blanco
     mImagen->fill(Qt::white);
     // Instanciar el Painter a partir de la imagen
     mPainter = new QPainter(mImagen);
     mPainter->setRenderHint(QPainter::Antialiasing);
+
     // Inicializar otras variables
     mPuedeDibujar = false;
     mColor = Qt::black;
@@ -35,8 +36,9 @@ void Principal::paintEvent(QPaintEvent *event)
     QPainter painter(this);
     // Dibujar la imagen
     painter.drawImage(0, 0, *mImagen);
-    // Acepatr el evento
+    // Aceptar el evento
     event->accept();
+
 }
 
 void Principal::mousePressEvent(QMouseEvent *event)
@@ -44,15 +46,15 @@ void Principal::mousePressEvent(QMouseEvent *event)
     // Levanta la bandera (para que se pueda dibujar)
     mPuedeDibujar = true;
     // Captura la posición (punto x,y) del mouse
-    mInicial = event->pos();
+    mInicial = event->pos();//Empieza desde donde yo pulso no donde termino (conecta)
     // Acepta el evento
     event->accept();
 }
 
 void Principal::mouseMoveEvent(QMouseEvent *event)
 {
-    // Validar si se puede dibujar
-    if ( !mPuedeDibujar ) {
+    // Validar si se puede dibujar(innecesario ya que el mouse tracking = on)
+    if ( !mPuedeDibujar ) { //Si no puede dibujar
         // Acepta el evento
         event->accept();
         // Salir del método
@@ -70,9 +72,9 @@ void Principal::mouseMoveEvent(QMouseEvent *event)
     // Mostrar el número de líneas en la barra de estado
     ui->statusbar->showMessage("Número de líneas: " + QString::number(++mNumLineas));
     // Actualizar la interfaz (repinta con paintEvent)
-    update();
+    update(); //Invoca al metodo PaintEvent
     // actualizar el punto inicial
-    mInicial = mFinal;
+    mInicial = mFinal; //El punto final se cambia al inicial del siguiente punto o movimiento
 }
 
 void Principal::mouseReleaseEvent(QMouseEvent *event)
@@ -91,7 +93,7 @@ void Principal::on_actionAncho_triggered()
                                   "Ancho del pincel",
                                   "Ingrese el ancho del pincel de dibujo",
                                   mAncho,
-                                  1, 20);
+                                  1, 20); //Rango
 }
 
 void Principal::on_actionSalir_triggered()
@@ -110,7 +112,7 @@ void Principal::on_actionNuevo_triggered()
 {
     mImagen->fill(Qt::white);
     mNumLineas = 0;
-    update();
+    update(); //Actualiza la interfaz
 }
 
 void Principal::on_actionGuardar_triggered()
@@ -136,3 +138,16 @@ void Principal::on_actionGuardar_triggered()
         }
     }
 }
+
+
+
+
+void Principal::on_actionLineas_triggered()
+{
+    QPainter painter(this);
+    painter.drawLine(mInicial,mFinal);
+
+
+
+}
+

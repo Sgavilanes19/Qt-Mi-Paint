@@ -20,6 +20,7 @@ Principal::Principal(QWidget *parent)
     mPuedeDibujar = false;
     mColor = Qt::black;
     mAncho = DEFAULT_ANCHO;
+    m_opcion = 1;
     mNumLineas = 0;
 }
 
@@ -53,13 +54,15 @@ void Principal::mousePressEvent(QMouseEvent *event)
 
 void Principal::mouseMoveEvent(QMouseEvent *event)
 {
-    // Validar si se puede dibujar(innecesario ya que el mouse tracking = on)
+    /* Validar si se puede dibujar(innecesario ya que el mouse tracking = on)
     if ( !mPuedeDibujar ) { //Si no puede dibujar
         // Acepta el evento
         event->accept();
         // Salir del método
         return;
-    }
+    }*/
+
+    if(m_opcion == 1){
     // Capturar el punto a donde se mueve el mouse
     mFinal = event->pos();
     // Crear un pincel y establecer atributos
@@ -75,17 +78,65 @@ void Principal::mouseMoveEvent(QMouseEvent *event)
     update(); //Invoca al metodo PaintEvent
     // actualizar el punto inicial
     mInicial = mFinal; //El punto final se cambia al inicial del siguiente punto o movimiento
+    }
 }
 
 void Principal::mouseReleaseEvent(QMouseEvent *event)
 {
-    // Bajar la bandera (no se puede dibujar)
-    mPuedeDibujar = false;
-    // Aceptar el vento
-    event->accept();
-
+    //Lineas
+    if(m_opcion == 2){
+        mPuedeDibujar = false;
+        // Capturar el punto donde se suelta el mouse
+        mFinal= event->pos();
+        //Crear un pincel y establecer atributos
+        QPen pincel;
+        pincel.setColor(mColor);
+        pincel.setWidth(mAncho);
+        //Dibujar lineas
+        mPainter->setPen(pincel);
+        mPainter->drawLine(mInicial,mFinal);
+        //Actualizar
+        update();
+        // Aceptar el evento
+        event->accept();
+    }
+    //Rectangulo
+    if(m_opcion == 3){
+        mPuedeDibujar = false;
+        // Capturar el punto donde se suelta el mouse
+        mFinal = event->pos();
+        //Crear un pincel y establecer atributos
+        QPen pincel;
+        pincel.setColor(mColor);
+        pincel.setWidth(mAncho);
+        //Dibujar rectangulos
+        QRect rectangulo (mInicial, mFinal);
+        mPainter->setPen(pincel);
+        mPainter->drawRect(rectangulo);
+        //Actualizar
+        update();
+        // Aceptar el evento
+        event->accept();
+    }
+    //Circunferencia
+    if(m_opcion ==4){
+        mPuedeDibujar = false;
+        // Capturar el punto donde se suelta el mouse
+        mFinal = event->pos();
+        //Crear un pincel y establecer atributos
+        QPen pincel;
+        pincel.setColor(mColor);
+        pincel.setWidth(mAncho);
+        //Dibujar circunferencias
+        QRectF circulos (mInicial, mFinal);
+        mPainter->setPen(pincel);
+        mPainter->drawEllipse(circulos);
+        //Actualizar
+        update();
+        // Aceptar el evento
+        event->accept();
+    }
 }
-
 
 void Principal::on_actionAncho_triggered()
 {
@@ -112,6 +163,7 @@ void Principal::on_actionNuevo_triggered()
 {
     mImagen->fill(Qt::white);
     mNumLineas = 0;
+    m_opcion = 1;
     update(); //Actualiza la interfaz
 }
 
@@ -139,15 +191,40 @@ void Principal::on_actionGuardar_triggered()
     }
 }
 
-
-
+void Principal::on_actionLibre_triggered()
+{
+    m_opcion = 1;
+}
 
 void Principal::on_actionLineas_triggered()
 {
-    QPainter painter(this);
-    painter.drawLine(mInicial,mFinal);
+    m_opcion = 2;
+}
+
+void Principal::on_actionRect_nculos_triggered()
+{
+    m_opcion = 3;
+}
+
+void Principal::on_actionCircunferencias_triggered()
+{
+    m_opcion = 4;
+}
 
 
+void Principal::on_actionAbrir_triggered()
+{
+    QString nombreArchivo = QFileDialog::getOpenFileName(this,"Imagen",QDir::home().absolutePath(),"Imagenes(*.jpg *.jpeg *.png);;Todos los ficheros(*)");
 
+    if (nombreArchivo.isNull()){
+        QMessageBox::warning(this, "Mi Paint", "No se puede abrir el archivo");
+        return;
+    }
+    m_foto.load(nombreArchivo);
+    m_foto = m_foto.scaled(ui->centralwidget->size(), Qt::KeepAspectRatio);
+    mImagen = new QImage(m_foto);
+
+    mPainter = new QPainter(mImagen);
+    mPainter->setRenderHint(QPainter::Antialiasing);
 }
 

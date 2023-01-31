@@ -12,6 +12,7 @@
 #include <QFileDialog> //Guardar el archivo
 #include <QMessageBox>
 #include <QToolBar>
+
 QT_BEGIN_NAMESPACE
 namespace Ui { class Principal; }
 QT_END_NAMESPACE
@@ -45,9 +46,17 @@ private slots:
 
     void on_actionLineas_triggered();
 
+    void on_actionLibre_triggered();
+
+    void on_actionRect_nculos_triggered();
+
+    void on_actionCircunferencias_triggered();
+
+    void on_actionAbrir_triggered();
+
 private:
     Ui::Principal *ui;
-    QImage *mImagen;        // Imagen sobre la que se va a dibujar
+    QImage *mImagen, m_foto;        // Imagen sobre la que se va a dibujar
     QPainter *mPainter;     // Painter de la imagen
     QPoint mInicial;        // Punto incial para dibujar la línea
     QPoint mFinal;          // Punto final para dibujar la línea
@@ -55,5 +64,6 @@ private:
     int mAncho;             // Define el ancho del pincel
     QColor mColor;          // Define el color del pincel
     int mNumLineas;         // Cuenta el número de líneas
+    int m_opcion;
 };
 #endif // PRINCIPAL_H

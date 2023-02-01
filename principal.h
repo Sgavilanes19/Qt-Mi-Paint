@@ -1,17 +1,18 @@
 #ifndef PRINCIPAL_H
 #define PRINCIPAL_H
 
-#include <QMainWindow> //Para que la clase herede
-#include <QImage>  //Imagen
+#include <QMainWindow>
+#include <QImage>
 #include <QPainter>
-#include <QMouseEvent> // Eventos del mouse
-#include <QPaintEvent> //Pintando
+#include <QMouseEvent>
+#include <QPaintEvent>
 #include <QDebug>
-#include <QInputDialog> //Cuadros de dialogo predeterminados
+#include <QInputDialog>
 #include <QColorDialog>
-#include <QFileDialog> //Guardar el archivo
+#include <QFileDialog>
 #include <QMessageBox>
-#include <QToolBar>
+#include <QPixmap>
+#include <QGraphicsView>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class Principal; }
@@ -26,11 +27,10 @@ public:
     ~Principal();
 
 protected:
-    void paintEvent(QPaintEvent *event) override;  //override (sobre-escrbir)
-    void mousePressEvent(QMouseEvent *event) override;   //click
-    void mouseMoveEvent(QMouseEvent *event) override;    //mover
-    void mouseReleaseEvent(QMouseEvent *event) override; //sueltas el mouse
-
+    void paintEvent(QPaintEvent *event) override;
+    void mousePressEvent(QMouseEvent *event) override;
+    void mouseMoveEvent(QMouseEvent *event) override;
+    void mouseReleaseEvent(QMouseEvent *event) override;
 
 
 private slots:
@@ -44,9 +44,9 @@ private slots:
 
     void on_actionGuardar_triggered();
 
-    void on_actionLineas_triggered();
-
     void on_actionLibre_triggered();
+
+    void on_actionLineas_triggered();
 
     void on_actionRect_nculos_triggered();
 
@@ -65,5 +65,6 @@ private:
     QColor mColor;          // Define el color del pincel
     int mNumLineas;         // Cuenta el número de líneas
     int m_opcion;
+    bool m_toogle = true;
 };
 #endif // PRINCIPAL_H

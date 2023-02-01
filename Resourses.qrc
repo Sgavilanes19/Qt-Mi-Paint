@@ -1,0 +1,17 @@
+<RCC>
+    <qresource prefix="/">
+        <file>Recursos/anadir-imagen.png</file>
+        <file>Recursos/ancho.png</file>
+        <file>Recursos/bloc-de-dibujo.png</file>
+        <file>Recursos/carpeta.png</file>
+        <file>Recursos/cerrar-sesion.png</file>
+        <file>Recursos/nueva-ventana.png</file>
+        <file>Recursos/paleta-de-color.png</file>
+        <file>Recursos/pintar.png</file>
+        <file>Recursos/rectangulo.png</file>
+        <file>Recursos/circulo.png</file>
+        <file>Recursos/linea-diagonal.png</file>
+        <file>Recursos/3162558.png</file>
+        <file>Recursos/guardar.png</file>
+    </qresource>
+</RCC>

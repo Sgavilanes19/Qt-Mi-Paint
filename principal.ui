@@ -13,8 +13,15 @@
   <property name="cursor">
    <cursorShape>CrossCursor</cursorShape>
   </property>
+  <property name="mouseTracking">
+   <bool>true</bool>
+  </property>
   <property name="windowTitle">
    <string>Principal</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="Resourses.qrc">
+    <normaloff>:/Recursos/3162558.png</normaloff>:/Recursos/3162558.png</iconset>
   </property>
   <widget class="QWidget" name="centralwidget"/>
   <widget class="QMenuBar" name="menubar">
@@ -56,8 +63,51 @@
    <addaction name="menuEstilo"/>
    <addaction name="menuForma"/>
   </widget>
-  <widget class="QStatusBar" name="statusbar"/>
+  <widget class="QStatusBar" name="statusbar">
+   <property name="mouseTracking">
+    <bool>true</bool>
+   </property>
+   <property name="acceptDrops">
+    <bool>true</bool>
+   </property>
+   <property name="toolTip">
+    <string/>
+   </property>
+   <property name="toolTipDuration">
+    <number>-1</number>
+   </property>
+   <property name="statusTip">
+    <string/>
+   </property>
+   <property name="accessibleName">
+    <string>tool_bar</string>
+   </property>
+  </widget>
+  <widget class="QToolBar" name="toolBar">
+   <property name="windowTitle">
+    <string>toolBar</string>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+   <addaction name="actionNuevo"/>
+   <addaction name="actionGuardar"/>
+   <addaction name="actionColor"/>
+   <addaction name="actionAncho"/>
+   <addaction name="actionLibre"/>
+   <addaction name="actionLineas"/>
+   <addaction name="actionRect_nculos"/>
+   <addaction name="actionCircunferencias"/>
+   <addaction name="separator"/>
+  </widget>
   <action name="actionNuevo">
+   <property name="icon">
+    <iconset resource="Resourses.qrc">
+     <normaloff>:/Recursos/nueva-ventana.png</normaloff>:/Recursos/nueva-ventana.png</iconset>
+   </property>
    <property name="text">
     <string>Nuevo</string>
    </property>
@@ -66,6 +116,10 @@
    </property>
   </action>
   <action name="actionGuardar">
+   <property name="icon">
+    <iconset resource="Resourses.qrc">
+     <normaloff>:/Recursos/guardar.png</normaloff>:/Recursos/guardar.png</iconset>
+   </property>
    <property name="text">
     <string>Guardar</string>
    </property>
@@ -74,6 +128,10 @@
    </property>
   </action>
   <action name="actionSalir">
+   <property name="icon">
+    <iconset resource="Resourses.qrc">
+     <normaloff>:/Recursos/cerrar-sesion.png</normaloff>:/Recursos/cerrar-sesion.png</iconset>
+   </property>
    <property name="text">
     <string>Salir</string>
    </property>
@@ -82,6 +140,10 @@
    </property>
   </action>
   <action name="actionColor">
+   <property name="icon">
+    <iconset resource="Resourses.qrc">
+     <normaloff>:/Recursos/paleta-de-color.png</normaloff>:/Recursos/paleta-de-color.png</iconset>
+   </property>
    <property name="text">
     <string>Color</string>
    </property>
@@ -90,6 +152,10 @@
    </property>
   </action>
   <action name="actionAncho">
+   <property name="icon">
+    <iconset resource="Resourses.qrc">
+     <normaloff>:/Recursos/ancho.png</normaloff>:/Recursos/ancho.png</iconset>
+   </property>
    <property name="text">
     <string>Ancho</string>
    </property>
@@ -101,6 +167,13 @@
    <property name="checkable">
     <bool>true</bool>
    </property>
+   <property name="checked">
+    <bool>false</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="Resourses.qrc">
+     <normaloff>:/Recursos/linea-diagonal.png</normaloff>:/Recursos/linea-diagonal.png</iconset>
+   </property>
    <property name="text">
     <string>Lineas</string>
    </property>
@@ -108,6 +181,10 @@
   <action name="actionLibre">
    <property name="checkable">
     <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="Resourses.qrc">
+     <normaloff>:/Recursos/bloc-de-dibujo.png</normaloff>:/Recursos/bloc-de-dibujo.png</iconset>
    </property>
    <property name="text">
     <string>Libre</string>
@@ -117,6 +194,10 @@
    <property name="checkable">
     <bool>true</bool>
    </property>
+   <property name="icon">
+    <iconset resource="Resourses.qrc">
+     <normaloff>:/Recursos/rectangulo.png</normaloff>:/Recursos/rectangulo.png</iconset>
+   </property>
    <property name="text">
     <string>Rectánculos</string>
    </property>
@@ -125,16 +206,26 @@
    <property name="checkable">
     <bool>true</bool>
    </property>
+   <property name="icon">
+    <iconset resource="Resourses.qrc">
+     <normaloff>:/Recursos/circulo.png</normaloff>:/Recursos/circulo.png</iconset>
+   </property>
    <property name="text">
     <string>Circunferencias</string>
    </property>
   </action>
   <action name="actionAbrir">
+   <property name="icon">
+    <iconset resource="Resourses.qrc">
+     <normaloff>:/Recursos/carpeta.png</normaloff>:/Recursos/carpeta.png</iconset>
+   </property>
    <property name="text">
     <string>Abrir</string>
    </property>
   </action>
  </widget>
- <resources/>
+ <resources>
+  <include location="Resourses.qrc"/>
+ </resources>
  <connections/>
 </ui>

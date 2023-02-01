@@ -9,13 +9,12 @@ Principal::Principal(QWidget *parent)
 {
     ui->setupUi(this);
     // Instanciando la imagen (creando)
-    mImagen = new QImage(this->size(),QImage::Format_ARGB32_Premultiplied); //Formato
+    mImagen = new QImage(this->size(),QImage::Format_ARGB32_Premultiplied);
     // Rellenar la imagen de color blanco
     mImagen->fill(Qt::white);
     // Instanciar el Painter a partir de la imagen
     mPainter = new QPainter(mImagen);
     mPainter->setRenderHint(QPainter::Antialiasing);
-
     // Inicializar otras variables
     mPuedeDibujar = false;
     mColor = Qt::black;
@@ -37,9 +36,8 @@ void Principal::paintEvent(QPaintEvent *event)
     QPainter painter(this);
     // Dibujar la imagen
     painter.drawImage(0, 0, *mImagen);
-    // Aceptar el evento
+    // Acepatr el evento
     event->accept();
-
 }
 
 void Principal::mousePressEvent(QMouseEvent *event)
@@ -47,37 +45,36 @@ void Principal::mousePressEvent(QMouseEvent *event)
     // Levanta la bandera (para que se pueda dibujar)
     mPuedeDibujar = true;
     // Captura la posición (punto x,y) del mouse
-    mInicial = event->pos();//Empieza desde donde yo pulso no donde termino (conecta)
+    mInicial = event->pos();
     // Acepta el evento
     event->accept();
 }
 
 void Principal::mouseMoveEvent(QMouseEvent *event)
 {
-    /* Validar si se puede dibujar(innecesario ya que el mouse tracking = on)
-    if ( !mPuedeDibujar ) { //Si no puede dibujar
+    // Validar si se puede dibujar
+    /*if ( !mPuedeDibujar ) {
         // Acepta el evento
         event->accept();
         // Salir del método
         return;
     }*/
-
     if(m_opcion == 1){
-    // Capturar el punto a donde se mueve el mouse
-    mFinal = event->pos();
-    // Crear un pincel y establecer atributos
-    QPen pincel;
-    pincel.setColor(mColor);
-    pincel.setWidth(mAncho);
-    // Dibujar una linea
-    mPainter->setPen(pincel);
-    mPainter->drawLine(mInicial, mFinal);
-    // Mostrar el número de líneas en la barra de estado
-    ui->statusbar->showMessage("Número de líneas: " + QString::number(++mNumLineas));
-    // Actualizar la interfaz (repinta con paintEvent)
-    update(); //Invoca al metodo PaintEvent
-    // actualizar el punto inicial
-    mInicial = mFinal; //El punto final se cambia al inicial del siguiente punto o movimiento
+        // Capturar el punto a donde se mueve el mouse
+        mFinal = event->pos();
+        // Crear un pincel y establecer atributos
+        QPen pincel;
+        pincel.setColor(mColor);
+        pincel.setWidth(mAncho);
+        // Dibujar una linea
+        mPainter->setPen(pincel);
+        mPainter->drawLine(mInicial, mFinal);
+        // Mostrar el número de líneas en la barra de estado
+        ui->statusbar->showMessage("Número de líneas: " + QString::number(++mNumLineas));
+        // Actualizar la interfaz (repinta con paintEvent)
+        update();
+        // actualizar el punto inicial
+        mInicial = mFinal;
     }
 }
 
@@ -144,7 +141,7 @@ void Principal::on_actionAncho_triggered()
                                   "Ancho del pincel",
                                   "Ingrese el ancho del pincel de dibujo",
                                   mAncho,
-                                  1, 20); //Rango
+                                  1, 20);
 }
 
 void Principal::on_actionSalir_triggered()
@@ -164,7 +161,7 @@ void Principal::on_actionNuevo_triggered()
     mImagen->fill(Qt::white);
     mNumLineas = 0;
     m_opcion = 1;
-    update(); //Actualiza la interfaz
+    update();
 }
 
 void Principal::on_actionGuardar_triggered()
@@ -191,6 +188,7 @@ void Principal::on_actionGuardar_triggered()
     }
 }
 
+
 void Principal::on_actionLibre_triggered()
 {
     m_opcion = 1;
@@ -199,6 +197,7 @@ void Principal::on_actionLibre_triggered()
 void Principal::on_actionLineas_triggered()
 {
     m_opcion = 2;
+    m_toogle = true;
 }
 
 void Principal::on_actionRect_nculos_triggered()
@@ -227,4 +226,3 @@ void Principal::on_actionAbrir_triggered()
     mPainter = new QPainter(mImagen);
     mPainter->setRenderHint(QPainter::Antialiasing);
 }
-
